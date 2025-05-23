@@ -1,0 +1,16 @@
+Flask
+sqlite3
+Flask-SQLAlchemy
+Flask-Migrate
+Flask-Login
+Flask-WTF
+Flask-Mail
+Flask-Bcrypt
+Flask-Admin
+Flask-RESTful
+Flask-Cors
+Flask-Session
+Flask-Cache
+Flask-Uploads
+Flask-Testing
+Flask-SocketIO
