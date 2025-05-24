@@ -36,6 +36,10 @@ class account:
         conn.commit()
         conn.close()
 
+    @staticmethod
+    def get_connection():
+        return sqlite3.connect(account.DB_PATH)
+
     def verify_age(self, age):
         if age < 16:
             raise ValueError("Age must be at least 16")
