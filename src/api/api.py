@@ -9,11 +9,11 @@ from alvara.logic.account import account
 app = Flask(__name__)
 
 @app.route('/api/accounts', methods=['GET'])
-def get_accounts():
+def get_accounts(id_account):
     # Exemple : retourne tous les comptes (à adapter selon ta structure)
     conn = account.get_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT id, fname, lname, age, address, phone, email FROM accounts")
+    cursor.execute("SELECT id, fname, lname, age, address, phone, email FROM accounts WHERE id = ?", (id_account,))
     accounts = [
         dict(zip(['id', 'fname', 'lname', 'age', 'address', 'phone', 'email'], row))
         for row in cursor.fetchall()
@@ -41,4 +41,4 @@ def create_account():
 
 if __name__ == '__main__':
     account.init_db()  # S'assure que la base existe
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
