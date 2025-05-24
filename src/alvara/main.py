@@ -3,7 +3,7 @@ from flask import Flask, render_template, request
 import os
 from logic.account import account
 
-app = flask.Flask(
+app = Flask(
     __name__,
     template_folder=os.path.join(os.path.dirname(__file__), 'templates'),
     static_folder=os.path.join(os.path.dirname(__file__), 'static')
@@ -35,4 +35,4 @@ def register():
     return render_template('register.html', error=error, success=success)
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=False, port=5001)
