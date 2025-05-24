@@ -34,5 +34,20 @@ def register():
             error = str(e)
     return render_template('register.html', error=error, success=success)
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    success = None
+    if request.method == 'POST':
+        try:
+            email = request.form['email']
+            password = request.form['password']
+            # Vérifier les informations d'identification de l'utilisateur
+            account.login(email, password)
+            success = "Login successful!"
+        except Exception as e:
+            error = str(e)
+    return render_template('login.html', error=error, success=success)
+
 if __name__ == '__main__':
     app.run(debug=False, port=5001)
