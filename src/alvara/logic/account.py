@@ -33,6 +33,21 @@ class account:
                 FOREIGN KEY(account_id) REFERENCES accounts(id)
             )
         ''')
+        # Table des transactions
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS transactions (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                sender INTEGER,
+                receiver INTEGER,
+                amount REAL,
+                transaction_type TEXT,
+                card TEXT,
+                date TEXT,
+                FOREIGN KEY(sender) REFERENCES accounts(id),
+                FOREIGN KEY(receiver) REFERENCES accounts(id)
+                FOREIGN KEY(card) REFERENCES cards(id)
+            )
+        ''')
         conn.commit()
         conn.close()
 
