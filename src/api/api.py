@@ -21,6 +21,19 @@ def get_accounts(id_account):
     conn.close()
     return jsonify(accounts)
 
+@app.route('/api/account/<int:id_account>', methods=['GET'])
+def get_account(id_account):
+    conn = account.get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, fname, lname, age, address, phone, email FROM accounts WHERE id = ?", (id_account,))
+    row = cursor.fetchone()
+    conn.close()
+    if row:
+        account_data = dict(zip(['id', 'fname', 'lname', 'age', 'address', 'phone', 'email'], row))
+        return jsonify(account_data)
+    else:
+        return jsonify({"error": "Account not found"}), 404
+
 @app.route('/api/accounts', methods=['POST'])
 def create_account():
     data = request.json
